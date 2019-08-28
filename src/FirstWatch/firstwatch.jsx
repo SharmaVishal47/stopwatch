@@ -1,8 +1,6 @@
 import { Card ,Typography,Button } from 'antd';
 import React, {useState} from 'react';
-import useInterval from 'react-useinterval';
-import classes from './firstwatch.scss';
-import Lap from "../Components/LapList";
+
 
 
 
@@ -11,69 +9,70 @@ const { Text } = Typography;
 
 const Firstwatch=() => {
 
-    const [inittialStartButton, setStartButton] = useState('start');
-
-    let showButtons = '';
-
-    if(inittialStartButton === 'start'){
-        showButtons = (
-            <div id="start" className="row">
-                <div id="sStartButton"  className="button wide"><span>Start</span></div>
-            </div>
-        )
-    }else if(inittialStartButton === 'second') {
-        showButtons = (
-            <div id="stop-lap" className="row">
-                <div id="sStopButton"  className="button"><span>Stop</span></div>
-                <div id="sLapButton"  className="button"><span>Lap</span></div>
-            </div>
-        )
-    }else if(inittialStartButton === 'third') {
-        showButtons = (
-            <div id="restart-reset" className="row">
-                <div id="sRestartButton"  className="button"><span>Restart</span></div>
-                <div id="sResetButton"   className="button"><span>Reset</span></div>
-            </div>
-        )
-    }
-
-
-    let [count, setCount] = useState(0);
-    let [delay, setDelay] = useState(1000);
-
-    useInterval(() => {
-        // Your custom logic here
-        setCount(count + 1);
-    }, delay);
-
-    function handleDelayChange(e) {
-        setDelay(Number(e.target.value));
-    }
 
 
 
     return(
-        <div style={{ background: '#ECECEC', padding: '30px' }}>
-            <Card title="Card title" bordered={false} style={{ width: 300 }}>
 
+        <div>
 
-                <div className="sDisplay">
-                    <span style={{fontSize: 23, width: 113} }>   00 : 00 : 00 : 000</span>
+            <div className="container">
 
+                <div id="page-header" className="page-header">
+               {/*     <span>St</span><img
+                    src="https://res.cloudinary.com/dftignrf8/image/upload/v1480901935/stopwatch_st153j.png"><span>pwatch</span>
+                </img>*/}
+                </div>
+
+                <div className="jumbotron">
+
+                    <div id="stopwatch">
+
+                        <div id="time">
+                            <span id="timeHour">00</span>:<span id="timeMinute">00</span>:<span
+                            id="timeSec">00</span>.<span id="timeCsec">00</span>
                         </div>
+                        <div id="lap">
+                            <span id="lapHour">00</span>:<span id="lapMinute">00</span>:<span
+                            id="lapSec">00</span>.<span id="lapCsec">00</span>
+                        </div>
+                    </div>
 
-                <div className="watchCommands">
-
-                    {showButtons}
+                    <div className="container">
+                        <div className="controls">
+                            <button type="button" id="startStop" className="btn-controls">
+                                <span className="glyphicon glyphicon-play" aria-hidden="true"></span>
+                                <span className="sr-only">Start</span>
+                            </button>
+                            <button type="button" id="split" className="btn-controls">Split</button>
+                            <button type="button" id="reset" className="btn-controls">Reset</button>
+                        </div>
+                    </div>
 
                 </div>
 
-            </Card>
+                <div id="lapTable" className="container">
+                    <table className="table">
+                        <thead>
+                        <tr>
+                            <th>Lap</th>
+                            <th>Interval</th>
+                            <th>Total</th>
+                            <th>Time Recorded</th>
+                        </tr>
+                        </thead>
+                        <tbody id="laptimes">
 
-            <h1>{count}</h1>
-            <input value={delay} onChange={handleDelayChange} />
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
 
         </div>
+
     )
 
 };
